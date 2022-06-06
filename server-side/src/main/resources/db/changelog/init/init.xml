@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <property name="uuid_function" value="uid.uuid_generate_v4()" dbms="postgresql"/>
+    <changeSet id="001" author="ilya.volkov">
+        <createTable tableName="roles">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false" unique="true" primaryKey="true"/>
+            </column>
+            <column name="title" type="varchar(25)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="users">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" unique="true"/>
+            </column>
+            <column name="name" type="varchar(125)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="surname" type="varchar(125)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="gender" type="varchar(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="middle_name" type="varchar(125)"/>
+            <column name="external_id" type="uuid">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="login" type="varchar(125)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password" type="varchar(125)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_id" type="int">
+                <constraints nullable="false" foreignKeyName="user_role" references="roles(id)"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="languages">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" unique="true"/>
+            </column>
+            <column name="code" type="varchar(3)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+
+
+        <addForeignKeyConstraint baseTableName="texts" baseColumnNames="test_id" constraintName="text_test"
+                                 referencedTableName="tests"
+                                 referencedColumnNames="id"/>
+
+    </changeSet>
+</databaseChangeLog>

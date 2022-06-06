@@ -1,0 +1,2 @@
+create user ProducerCentr_multi_test_user with password '1q2w3e';
+create database ProducerCentr_multi_test with owner ProducerCentr_multi_test_user;
