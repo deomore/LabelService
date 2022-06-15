@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,30 +14,25 @@ import java.util.UUID;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class User extends BaseEntity{
+    @Column(name = "name")
     private String name;
-    private String surname;
-    @Column(name = "middle_name")
-    private String middleName;
-    @Enumerated(value = EnumType.STRING)
-    private Gender gender;
-    @Column(name = "external_id")
-    private UUID externalId = UUID.randomUUID();
-    private String password;
-    private String login;
+
+    @Column(name = "email")
     private String email;
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    private Role role;
-    @ManyToOne
-    @JoinColumn(name = "ProducerCentrlogist_id")
-    private User ProducerCentrlogist;
 
-    @OneToMany(mappedBy = "ProducerCentrlogist")
-    private List<User> clients;
+    @Column(name = "password")
+    private String password;
 
-    @ManyToMany(mappedBy = "allowedUsers")
-    private List<CustomTest> allowedTest;
+    @Column(name = "birthday")
+    private LocalDate birthDate;
 
-    @OneToMany(mappedBy = "user")
-    private List<TakenTest> takenTests;
+    @Column(name = "gender")
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+
+    @ManyToMany
+    @JoinTable(name="user_role",
+    joinColumns = @JoinColumn(name="user_id"),
+    inverseJoinColumns = @JoinColumn(name="role_id"))
+    private List<Role> roles;
 }

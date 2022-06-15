@@ -11,7 +11,7 @@ import javax.persistence.*;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class Role extends BaseEntity{
-    @Column(name = "title")
+    @Column(name = "role_name")
     @Enumerated(value = EnumType.STRING)
     private RoleTitle title;
 }

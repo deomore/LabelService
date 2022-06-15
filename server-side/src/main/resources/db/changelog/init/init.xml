@@ -10,55 +10,69 @@
             <column name="id" type="int" autoIncrement="true">
                 <constraints nullable="false" unique="true" primaryKey="true"/>
             </column>
-            <column name="title" type="varchar(25)">
+            <column name="role_name" type="varchar(25)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
-
         <createTable tableName="users">
             <column name="id" type="int" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false" unique="true"/>
+                <constraints nullable="false" unique="true" primaryKey="true"/>
             </column>
-            <column name="name" type="varchar(125)">
-                <constraints nullable="false"/>
+            <column name="name" type="varchar(125)"/>
+            <column name="email" type="varchar(125)">
+                <constraints unique="true"/>
             </column>
-            <column name="surname" type="varchar(125)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="gender" type="varchar(6)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="middle_name" type="varchar(125)"/>
-            <column name="external_id" type="uuid">
-                <constraints nullable="false" unique="true"/>
-            </column>
-            <column name="login" type="varchar(125)">
-                <constraints nullable="false" unique="true"/>
-            </column>
-            <column name="password" type="varchar(125)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="email" type="varchar(255)">
-                <constraints nullable="false"/>
+            <column name="password" type="varchar(125)"/>
+            <column name="birthday" type="date"/>
+            <column name="gender" type="varchar(25)"/>
+        </createTable>
+
+        <createTable tableName="user_role">
+            <column name="user_id" type="int">
+                <constraints primaryKey="true" foreignKeyName="fk1" references="users(id)"/>
             </column>
             <column name="role_id" type="int">
-                <constraints nullable="false" foreignKeyName="user_role" references="roles(id)"/>
+                <constraints primaryKey="true" foreignKeyName="fk2" references="roles(id)"/>
             </column>
         </createTable>
-
-        <createTable tableName="languages">
+        
+        <createTable tableName="sources">
             <column name="id" type="int" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false" unique="true"/>
+                <constraints unique="true" primaryKey="true"/>
             </column>
-            <column name="code" type="varchar(3)">
-                <constraints nullable="false" unique="true"/>
+            <column name="source1url" type="varchar(256)"/>
+            <column name="source2url" type="varchar(256)"/>
+            <column name="source3url" type="varchar(256)"/>
+        </createTable>
+
+        <createTable tableName="artists">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints unique="true" primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(125)"/>
+            <column name="fio" type="varchar(256)"/>
+            <column name="genre" type="varchar(256)"/>
+            <column name="user_id" type="int">
+                <constraints foreignKeyName="fk3" references="users(id)"/>
             </column>
         </createTable>
 
-
-        <addForeignKeyConstraint baseTableName="texts" baseColumnNames="test_id" constraintName="text_test"
-                                 referencedTableName="tests"
-                                 referencedColumnNames="id"/>
-
+        <createTable tableName="releases">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" unique="true"/>
+            </column>
+            <column name="name" type="varchar(256)"/>
+            <column name="genre" type="varchar(256)"/>
+            <column name="release_url" type="varchar(256)"/>
+            <column name="source_id" type="int">
+                <constraints foreignKeyName="fk6" references="sources(id)"/>
+            </column>
+            <column name="user_id" type="int">
+                <constraints foreignKeyName="fk4" references="users(id)"/>
+            </column>
+            <column name="artist_id" type="int">
+                <constraints foreignKeyName="fk5" references="artists(id)"/>
+            </column>
+        </createTable>
     </changeSet>
 </databaseChangeLog>

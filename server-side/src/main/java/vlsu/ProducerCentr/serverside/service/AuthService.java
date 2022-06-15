@@ -1,7 +1,9 @@
 package vlsu.ProducerCentr.serverside.service;
 
-import vlsu.ProducerCentr.serverside.dto.auth.AuthRequestDto;
-import vlsu.ProducerCentr.serverside.dto.auth.AuthResponseDto;
+
+
+import vlsu.ProducerCentr.serverside.dto.AuthRequestDto;
+import vlsu.ProducerCentr.serverside.dto.AuthResponseDto;
 
 import java.util.UUID;
 

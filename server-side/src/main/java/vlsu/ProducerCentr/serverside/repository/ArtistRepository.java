@@ -2,9 +2,8 @@ package vlsu.ProducerCentr.serverside.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import vlsu.ProducerCentr.serverside.model.User;
+import vlsu.ProducerCentr.serverside.model.Artist;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
-    User findByEmail(String login);
+public interface ArtistRepository extends JpaRepository<Artist, Integer> {
 }

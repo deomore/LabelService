@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import vlsu.ProducerCentr.serverside.dto.auth.AuthRequestDto;
-import vlsu.ProducerCentr.serverside.dto.auth.AuthResponseDto;
+import vlsu.ProducerCentr.serverside.dto.AuthRequestDto;
+import vlsu.ProducerCentr.serverside.dto.AuthResponseDto;
 import vlsu.ProducerCentr.serverside.service.AuthService;
 
 import javax.validation.Valid;

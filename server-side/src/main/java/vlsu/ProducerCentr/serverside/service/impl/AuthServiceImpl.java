@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import vlsu.ProducerCentr.serverside.dto.auth.AuthRequestDto;
-import vlsu.ProducerCentr.serverside.dto.auth.AuthResponseDto;
+import vlsu.ProducerCentr.serverside.dto.AuthRequestDto;
+import vlsu.ProducerCentr.serverside.dto.AuthResponseDto;
 import vlsu.ProducerCentr.serverside.model.User;
 import vlsu.ProducerCentr.serverside.service.AuthService;
 import vlsu.ProducerCentr.serverside.service.UserService;
@@ -16,6 +16,7 @@ import vlsu.ProducerCentr.serverside.utils.jwt.JwtProvider;
 
 import java.util.Objects;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -28,7 +29,7 @@ public class AuthServiceImpl implements AuthService {
     public AuthResponseDto createToken(AuthRequestDto requestDto) {
         User user = userService.findByLogin(requestDto.getLogin());;
         if(Objects.nonNull(user) && encoder.matches(requestDto.getPassword(), user.getPassword())) {
-            return new AuthResponseDto().setToken(jwtProvider.generateToken(user)).setRole(user.getRole().getTitle().toString());
+            return new AuthResponseDto().setToken(jwtProvider.generateToken(user)).setRoles(user.getRoles().stream().map(item -> item.getTitle().toString()).collect(Collectors.toList()));
         } else {
             throw new BusinessException().setCode(ErrorCode.WRONG_CREDENTIALS);
         }

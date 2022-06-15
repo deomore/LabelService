@@ -11,11 +11,7 @@ import vlsu.ProducerCentr.serverside.model.User;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
-import java.util.function.Consumer;
 import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 @Component
 @RequiredArgsConstructor
@@ -23,14 +19,13 @@ import java.util.function.Supplier;
 public class JwtProvider {
     private final ApplicationProperties properties;
     private static final Map<Claim, Function<User, Object>> CLAIMS_FOR_JWT = Map.of(
-            Claim.EXTERNAL_ID, User::getExternalId,
             Claim.EMAIL, User::getEmail
     );
 
     public String generateToken(User user) {
         return Jwts.builder()
                 .setClaims(setClaims(user))
-                .setSubject(user.getLogin())
+                .setSubject(user.getEmail())
                 .setExpiration(new Date(new Date().getTime() + properties.getExpirationTime()))
                 .signWith(SignatureAlgorithm.HS256, properties.getJwtSecret())
                 .compact();
@@ -71,7 +66,7 @@ public class JwtProvider {
         return (SecurityContextHolder.getContext().getAuthentication().getAuthorities().toArray()[0]).toString();
     }
 
-    public String getLoginFromToken(String token) {
+    public String getEmailFromToken(String token) {
         return Jwts.parser().setSigningKey(properties.getJwtSecret()).parseClaimsJws(token).getBody().getSubject();
     }
 

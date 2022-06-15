@@ -5,12 +5,5 @@
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
 <!--Roles insert-->
-<include file="db/changelog/patches/role-init/role-init.xml"/>
-<!--Adding text column in texts tables-->
-<include file="db/changelog/patches/add-text-value/add-text-value.xml"/>
-<!--Adding language codes-->
-
-
- <include file="db/changelog/patches/insert-burn-out-test/insert-burn-out-test.xml"/>
-
+ <include file="db/changelog/patches/role-init/role-init.xml"/>
 </databaseChangeLog>

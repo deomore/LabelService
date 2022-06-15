@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/ProducerCentr
-    username: ProducerCentr
-    password: 1q2w3e
+    username: postgres
+    password: yfgjktjy1813
   liquibase:
     driver-class-name: org.postgresql.Driver
     change-log: db/changelog/changelog-master.xml

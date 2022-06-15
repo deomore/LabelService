@@ -7,9 +7,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import vlsu.ProducerCentr.serverside.model.Role;
 import vlsu.ProducerCentr.serverside.model.User;
 import vlsu.ProducerCentr.serverside.repository.UserRepository;
-import vlsu.ProducerCentr.serverside.service.UserService;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,9 +22,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         try {
-            User user = repository.findByLogin(login);
+            User user = repository.findByEmail(login);
             Set<GrantedAuthority> ga = new HashSet<>();
-            ga.add(new SimpleGrantedAuthority(user.getRole().getTitle().toString()));
+            for(Role role : user.getRoles()) {
+                ga.add(new SimpleGrantedAuthority(role.getTitle().toString()));
+            }
             return new org.springframework.security.core.userdetails.User(
                     login,
                     user.getPassword(),
