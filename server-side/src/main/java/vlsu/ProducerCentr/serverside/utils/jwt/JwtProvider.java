@@ -33,9 +33,9 @@ public class JwtProvider {
 
     private Map<String, Object> setClaims(User user) {
         Map<String, Object> claims = new HashMap<>();
-        properties.getClaimForJwt().forEach(
-                claim -> claims.put(claim.toString(), CLAIMS_FOR_JWT.get(claim).apply(user))
-        );
+        //properties.getClaimForJwt().forEach(
+          //      claim -> claims.put(claim.toString(), CLAIMS_FOR_JWT.get(claim).apply(user))
+        //);
         return claims;
     }
 

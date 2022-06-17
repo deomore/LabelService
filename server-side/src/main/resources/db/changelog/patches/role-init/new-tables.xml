@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+	<changeSet id="4" author="ilyuhich">
+		<createTable tableName="contracts">
+			<column name="id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="date" type="date"/>
+			<column name="type" type="boolean"/>
+			<column name="contract_url" type="varchar(256)"/>
+		</createTable>
+		<createTable tableName="demo_drop">
+			<column name="id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="demo_url" type="varchar(256)"/>
+			<column name="description" type="varchar(256)"/>
+			<column name="contract_id" type="int">
+				<constraints foreignKeyName="fk_contract" references="contracts(id)"/>
+			</column>
+			<column name="mail" type="varchar(256)"/>
+		</createTable>
+		<createTable tableName="concerts">
+			<column name="id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="city" type="varchar(256)"/>
+			<column name="date" type="date"/>
+			<column name="price" type="float"/>
+			<column name="artist_id" type="int">
+				<constraints foreignKeyName="fk_artist" references="artists(id)"/>
+			</column>
+			<column name="user_id" type="int">
+				<constraints foreignKeyName="fk_user" references="users(id)"/>
+			</column>
+		</createTable>
+	</changeSet>
+</databaseChangeLog>

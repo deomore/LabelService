@@ -13,6 +13,7 @@ import vlsu.ProducerCentr.serverside.repository.UserRepository;
 
 import java.util.HashSet;
 import java.util.Set;
+import javax.transaction.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +21,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private final UserRepository repository;
 
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         try {
             User user = repository.findByEmail(login);

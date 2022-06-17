@@ -1,25 +1,34 @@
 package vlsu.ProducerCentr.serverside.model;
 
+import liquibase.pro.packaged.C;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-@Entity(name = "artists")
+@Entity(name = "concerts")
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class Artist extends BaseEntity {
-	@Column(name = "name")
-	private String name;
-	@Column(name = "fio")
-	private String fio;
-	@Column(name = "genre")
-	private String genre;
+public class Concert extends BaseEntity {
+	@ManyToOne
+	@JoinColumn(name = "artist_id")
+	private Artist artist;
+
+	@Column(name = "city")
+	private String city;
+
+	@Column(name = "date")
+	private LocalDate date;
+
+	@Column(name = "price")
+	private Float price;
+
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;

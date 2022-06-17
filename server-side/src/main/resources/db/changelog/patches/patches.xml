@@ -6,4 +6,5 @@
 
 <!--Roles insert-->
  <include file="db/changelog/patches/role-init/role-init.xml"/>
+ <include file="db/changelog/patches/role-init/new-tables.xml"/>
 </databaseChangeLog>

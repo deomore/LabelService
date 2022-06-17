@@ -28,8 +28,8 @@ public class ReleaseServiceImpl implements ReleaseService {
 	@Override
 	@Transactional
 	public Release addRelease(AddReleaseDto addReleaseDto) {
-		Source source = sourceRepository.getById(addReleaseDto.getSourceId());
-		Artist artist = artistRepository.getById(addReleaseDto.getArtistId());
+		Source source = sourceRepository.findById(addReleaseDto.getSourceId()).get();
+		Artist artist = artistRepository.findById(addReleaseDto.getArtistId()).get();
 		String email = jwtProvider.getEmailFromToken(SecurityContextHolder.getContext().getAuthentication().getDetails().toString());
 		User user = userRepository.findByEmail(email);
 		Release release = new Release();

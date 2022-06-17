@@ -7,20 +7,21 @@ import lombok.ToString;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 
-@Entity(name = "artists")
+@Entity(name = "demo_drop")
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class Artist extends BaseEntity {
-	@Column(name = "name")
-	private String name;
-	@Column(name = "fio")
-	private String fio;
-	@Column(name = "genre")
-	private String genre;
+public class DemoDrop extends BaseEntity {
+	@Column(name = "demo_url")
+	private String demoUrl;
+	@Column(name = "description")
+	private String description;
+	@Column(name = "mail")
+	private String mail;
 	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private User user;
+	@JoinColumn(name = "contract_id")
+	private Contract contract;
 }
