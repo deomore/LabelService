@@ -7,4 +7,5 @@ public class AddArtistDto {
 	private String name;
 	private String fio;
 	private String genre;
+	private Integer contractId;
 }
