@@ -3,6 +3,7 @@ package vlsu.ProducerCentr.serverside.controller;
 import lombok.RequiredArgsConstructor;
 import org.dom4j.rule.Mode;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +25,8 @@ import vlsu.ProducerCentr.serverside.service.ConcertService;
 import vlsu.ProducerCentr.serverside.service.ContractService;
 import vlsu.ProducerCentr.serverside.service.DemoDropService;
 import vlsu.ProducerCentr.serverside.service.ReleaseService;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -69,5 +72,11 @@ public class Controller {
 	@PreAuthorize("permitAll()")
 	public DemoDrop bindWithContract(@RequestBody BindDemoWithContractDto bindDemoWithContractDto) {
 		return demoDropService.bindWithContract(bindDemoWithContractDto);
+	}
+
+	@GetMapping("/getArtist")
+	@PreAuthorize("permitAll()")
+	public List<Artist> getArtists() {
+		return artistService.getArtist();
 	}
 }

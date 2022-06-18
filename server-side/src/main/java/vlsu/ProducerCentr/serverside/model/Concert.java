@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity(name = "concerts")
 @Data
@@ -28,6 +29,10 @@ public class Concert extends BaseEntity {
 
 	@Column(name = "price")
 	private Float price;
+
+	@OneToOne
+	@JoinColumn(name = "release_id")
+	private Release release;
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")

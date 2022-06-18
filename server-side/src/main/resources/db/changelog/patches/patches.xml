@@ -7,4 +7,6 @@
 <!--Roles insert-->
  <include file="db/changelog/patches/role-init/role-init.xml"/>
  <include file="db/changelog/patches/role-init/new-tables.xml"/>
+ <include file="db/changelog/patches/role-init/add-column.xml"/>
+ <include file="db/changelog/patches/role-init/add-column-release.xml"/>
 </databaseChangeLog>
